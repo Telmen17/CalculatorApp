@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CalculatorApp</string>
+    <string name="C">C</string>
+    <string name="division_symbol">\u00F7</string>
+    <string name="multiplication_symbol">\u00D7</string>
 </resources>
