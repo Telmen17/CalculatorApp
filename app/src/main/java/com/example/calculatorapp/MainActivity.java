@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MaterialButton button0,button1,button2,button3,button4,button5,button6,button7,button8,button9;
     MaterialButton buttonMul, buttonPlus, buttonSub, buttonDivide, buttonEquals;
     MaterialButton buttonAC, buttonDot;
+    // New Added operator buttons
+    MaterialButton button_open_curly, button_closed_curly, buttonExp, buttonSin, buttonCos,
+    buttonTan, buttonCot, buttonLN, buttonLG;
+
     /**
      * Initializes the application window and assigns the
      * text and button elements to the field objects.
@@ -71,6 +75,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         assignID(buttonAC, R.id.button_ac);
         assignID(buttonDot, R.id.button_dot);
         assignID(buttonEquals, R.id.button_equal);
+        // Additional operators
+        assignID(button_open_curly, R.id.button_open_curly);
+        assignID(button_closed_curly, R.id.button_closed_curly);
+        assignID(buttonExp, R.id.button_exponent);
+        assignID(buttonSin, R.id.button_sin);
+        assignID(buttonCos, R.id.button_cos);
+        assignID(buttonTan, R.id.button_tan);
+        assignID(buttonCot, R.id.button_cot);
     }
 
     /**
