@@ -4,6 +4,9 @@
  */
 package com.example.calculatorapp;
 
+import java.util.*;
+import java.util.regex.*;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // New Added operator buttons
     MaterialButton button_open_curly, button_closed_curly, buttonExp, buttonSin, buttonCos,
     buttonTan, buttonCot, buttonLN, buttonLG;
+
+    private static final Pattern TOKEN_PATTERN = Pattern.compile(
+            "(\\d+\\.\\d+|\\d+)|([+\\-*/^(){}])|(sin|cos|tan|cot|ln|log10)");
 
     /**
      * Initializes the application window and assigns the
@@ -151,4 +157,101 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return "Error";
         }
     }
+
+    public static List<String> tokenize(String expr) {
+        List<String> tokens = new ArrayList<>();
+        Matcher matcher = TOKEN_PATTERN.matcher(expr);
+
+        boolean lastWasOperator = true; // Assume an operator before the first token
+
+        while (matcher.find()) {
+            String token = matcher.group();
+
+            if (token.matches("\\d+(\\.\\d+)?")) { // Number
+                tokens.add(token);
+                lastWasOperator = false;
+            } else if (token.equals("-") && lastWasOperator) { // Unary Minus
+                tokens.add("NEG"); // Temporary token for negative numbers
+            } else {
+                tokens.add(token); // Operators, parentheses, functions
+                lastWasOperator = !token.matches("\\)");
+            }
+        }
+        return tokens;
+    }
+    public static List<String> infixToPostfix(List<String> tokens) {
+        Map<String, Integer> precedence = Map.of(
+                "^", 3,
+                "*", 2, "/", 2,
+                "+", 1, "-", 1
+        );
+
+        Stack<String> operators = new Stack<>();
+        List<String> output = new ArrayList<>();
+
+        for (int i = 0; i < tokens.size(); i++) {
+            String token = tokens.get(i);
+
+            if (token.matches("\\d+(\\.\\d+)?")) {
+                output.add(token);
+            } else if (token.equals("NEG")) {
+                output.add("0"); // Convert -X to (0 X -)
+                operators.push("-");
+            } else if (token.matches("sin|cos|tan|cot|ln|log10")) {
+                operators.push(token);
+            } else if (token.equals("(") || token.equals("{")) {
+                operators.push(token);
+            } else if (token.equals(")") || token.equals("}")) {
+                while (!operators.isEmpty() && !operators.peek().equals("(") && !operators.peek().equals("{")) {
+                    output.add(operators.pop());
+                }
+                operators.pop();
+            } else {
+                while (!operators.isEmpty() && precedence.getOrDefault(operators.peek(), 0) >= precedence.get(token)) {
+                    output.add(operators.pop());
+                }
+                operators.push(token);
+            }
+        }
+
+        while (!operators.isEmpty()) {
+            output.add(operators.pop());
+        }
+
+        return output;
+    }
+
+    public static double evaluatePostfix(List<String> tokens) {
+        Stack<Double> stack = new Stack<>();
+
+        for (String token : tokens) {
+            if (token.matches("\\d+(\\.\\d+)?")) {
+                stack.push(Double.parseDouble(token));
+            } else if (token.equals("NEG")) {
+                stack.push(-stack.pop()); // Apply unary minus
+            } else if (token.matches("sin|cos|tan|cot|ln|log10")) {
+                double num = stack.pop();
+                switch (token) {
+                    case "sin" -> stack.push(Math.sin(num));
+                    case "cos" -> stack.push(Math.cos(num));
+                    case "tan" -> stack.push(Math.tan(num));
+                    case "cot" -> stack.push(1 / Math.tan(num));
+                    case "ln" -> stack.push(Math.log(num));
+                    case "log10" -> stack.push(Math.log10(num));
+                }
+            } else {
+                double b = stack.pop(), a = stack.pop();
+                switch (token) {
+                    case "+" -> stack.push(a + b);
+                    case "-" -> stack.push(a - b);
+                    case "*" -> stack.push(a * b);
+                    case "/" -> stack.push(a / b);
+                    case "^" -> stack.push(Math.pow(a, b));
+                }
+            }
+        }
+        return stack.pop();
+    }
+
+
 }
