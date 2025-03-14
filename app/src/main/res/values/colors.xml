@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="darkMode">#1F1B24</color> <!-- Dark mode (dark background) -->
+    <color name="redBackground">#FFF15142</color>
 </resources>

@@ -3,4 +3,8 @@
     <string name="C">C</string>
     <string name="division_symbol">\u00F7</string>
     <string name="multiplication_symbol">\u00D7</string>
+    <string name="test">Test</string>
+    <string name="test_case_generator">Test Case Generator</string>
+    <string name="start">Start</string>
+    <string name="go_back">Go Back</string>
 </resources>

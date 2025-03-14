@@ -8,6 +8,27 @@
     android:background="@color/darkMode"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_test"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="96dp"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="#673AB7"
+            android:text="@string/test"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:cornerRadius="30dp" />
+    </LinearLayout>
+
     <!--Text Display Windows-->
     <TextView
         android:id="@+id/solution_tv"

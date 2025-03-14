@@ -8,6 +8,7 @@ package com.example.calculatorapp;
 import java.util.*;
 import java.util.regex.*;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -19,9 +20,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
-
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -37,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // New Added operator buttons
     MaterialButton button_open_curly, button_closed_curly, buttonExp, buttonSin, buttonCos,
     buttonTan, buttonCot, buttonLN, buttonLG;
+
+    MaterialButton buttonTest;
 
     private static final Pattern TOKEN_PATTERN = Pattern.compile(
             "(\\d+\\.\\d+|\\d+)|([+\\-*/^(){}])|(sin|cos|tan|cot|ln|log10)");
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
 
         //Assigning the IDs of TextView elements to their objects.
         resultTV = findViewById(R.id.result_tv);
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         assignID(buttonCot, R.id.button_cot);
         assignID(buttonLN, R.id.button_ln);
         assignID(buttonLG, R.id.button_lg);
+        // Testing button
+        assignID(buttonTest, R.id.button_test);
     }
 
     /**
@@ -141,9 +144,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //If the "C" button is pressed, then the solution text field's last value is deleted.
         if (buttonText.equals("C")) {
             dataToCalculate = dataToCalculate.substring(0, dataToCalculate.length() - 1);
+        } else if (buttonText.equals("Test")) {
+            Intent intent = new Intent(view.getContext(), TestActivity.class);
+            view.getContext().startActivity(intent);
         } else {
             //Else, the dataToCalculate is  concatenated with the pressed button text.
             dataToCalculate = dataToCalculate + buttonText;
+        }
+
+        if (buttonText.equals("Test")) {
+            Intent intent = new Intent(view.getContext(), TestActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            view.getContext().startActivity(intent);
         }
 
         //The solutionTV text field is updated with a new String value.
@@ -326,6 +338,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String cleanedExpr = expression.replaceAll("sin|cos|tan|cot|ln|log10", ""); // Remove function names
         if (!cleanedExpr.matches("[0-9+\\-*/^().{},\\s]+")) return false;
 
+        // Check for multiple dots in a single number
+        String[] tokens = cleanedExpr.split("[+\\-*/^(),{}\\s]+");
+        for (String token : tokens) {
+            if (token.chars().filter(ch -> ch == '.').count() > 1) {
+                return false; // More than one dot in a number
+            }
+        }
+
         return true;
     }
+
 }
+
+
