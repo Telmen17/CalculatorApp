@@ -7,4 +7,6 @@
     <string name="test_case_generator">Test Case Generator</string>
     <string name="start">Start</string>
     <string name="go_back">Go Back</string>
+    <string name="discrip">Please enter the length of test cases below:</string>
+    <string name="enter_size">Enter size</string>
 </resources>

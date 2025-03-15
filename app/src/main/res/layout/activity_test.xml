@@ -48,6 +48,26 @@
             android:text="@string/test_case_generator"
         />
 
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="395dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:text="@string/discrip"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/input_field"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/enter_size"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:background="@android:drawable/edit_text"
+            android:inputType="number"
+        />
+
         <LinearLayout
             android:id="@+id/field_start"
             android:gravity="center"
@@ -80,14 +100,28 @@
             android:background="@drawable/redseparator"/>
 
         <!-- Result Text Field -->
-        <TextView
-            android:id="@+id/text_result"
+<!--        <TextView-->
+<!--            android:id="@+id/text_result"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:scrollbars="vertical"-->
+<!--            android:maxLines="500"-->
+<!--            android:textSize="16sp"-->
+<!--        />-->
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            android:maxLines="100"
-            android:textSize="16sp"
-        />
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/text_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:scrollbars="vertical"/>
+        </ScrollView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
