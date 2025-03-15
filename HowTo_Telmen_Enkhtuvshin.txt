@@ -2,6 +2,7 @@ This is the How to instruction READ_ME file to run Telmen Enkhtuvshin's Calculat
 
 The Calculator Program is a Android Mobile Application which used Java and XML programming languages and systems. The main platform used to develop this application is Android Studio IDE.
 Thus, the application does not directly run from the Command Line Interface. An emulator needs to be used to run the application inside Android Studio IDE. 
+Moreover, the Test Case Generator uses MxParser as an Oracle to validate the test cases and compare it to the Calculator evaluator.
 So, the directions to download Andoird Studio IDE and run the application with the emulator are as follows:
 
 1. Download Android Studio Iguana  | 2023.2.1 (Feb 2024) version from the internet with the correct OS to download the IDE on.
