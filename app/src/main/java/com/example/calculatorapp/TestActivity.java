@@ -1,3 +1,8 @@
+/**
+ * @author Telmen Enkhtuvshin
+ * Backend activity class for Test Activity Page.
+ */
+
 package com.example.calculatorapp;
 
 import static com.example.calculatorapp.MainActivity.*;

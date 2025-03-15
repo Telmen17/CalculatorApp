@@ -99,16 +99,6 @@
             app:layout_constraintTop_toBottomOf="@id/title"
             android:background="@drawable/redseparator"/>
 
-        <!-- Result Text Field -->
-<!--        <TextView-->
-<!--            android:id="@+id/text_result"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:scrollbars="vertical"-->
-<!--            android:maxLines="500"-->
-<!--            android:textSize="16sp"-->
-<!--        />-->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
