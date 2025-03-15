@@ -1,4 +1,4 @@
-This is the How to instruction READ_ME file to run Telmen Enkhtuvshin's Calculator App.
+This is the How to instruction READ_ME file to run Telmen Enkhtuvshin's Calculator App and its Test Case Generator.
 
 The Calculator Program is a Android Mobile Application which used Java and XML programming languages and systems. The main platform used to develop this application is Android Studio IDE.
 Thus, the application does not directly run from the Command Line Interface. An emulator needs to be used to run the application inside Android Studio IDE. 
@@ -10,4 +10,4 @@ So, the directions to download Andoird Studio IDE and run the application with t
 4. Open the CalculatorApp project folder in Android Studio IDE.
 5. Run the app with the desired emulator. (Pixel 7a API 35 is preferred.)
 
-Now your application can run and have fun interacting with the program!
+Now your application can run and have fun interacting with the program with the Calculator and the Test Case Generator!
